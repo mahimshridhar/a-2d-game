@@ -4,17 +4,21 @@
   "description": "",
   "main": "game.js",
   "dependencies": {
+    "express": "^4.17.1",
     "phaser": "^3.55.2",
-    "webpack-cli": "^4.8.0",
-    "webpack": "^5.51.1"
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "html-webpack-plugin": "^5.3.2",
-    "webpack-dev-server": "^4.0.0"
+    "webpack-dev-server": "^4.0.0",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-hot-server-middleware": "^0.6.1"
   },
   "scripts": {
-    "dev": "webpack server --config webpack.config.js"
+    "dev": "webpack server --config webpack.config.js",
+    "server:dev": "node server.js"
   },
   "repository": {
     "type": "git",

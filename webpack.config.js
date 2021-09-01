@@ -2,14 +2,15 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const express = require("express");
 
 module.exports = {
-
   mode: "development",
   devtool: "eval-source-map",
   entry: "./game.js",
   output: {
-    filename: "bundle.min.js"
+    filename: "bundle.min.js",
+    publicPath: "/",
   },
   module: {
     rules: [
@@ -23,8 +24,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin(),
-  ],
+  plugins: [new CleanWebpackPlugin(), new HtmlWebpackPlugin()],
 };
