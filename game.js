@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 // import level1 from "./level/level_1";
 import dungeon from "./dungeon";
+import PlayerCharacter from "./player";
 
 var config = {
   type: Phaser.AUTO,
@@ -29,26 +30,6 @@ function preload() {
 }
 
 function create() {
-  // const wall = 198;
-  // const floor = 0;
-  // const level = level1.map((r) => r.map((t) => (t == 1 ? wall : floor)));
-
-  // // Draw the tilemap
-  // const tileSize = 16;
-  // const config = {
-  //   data: level,
-  //   tileWidth: tileSize,
-  //   tileHeight: tileSize,
-  // };
-  // const map = this.make.tilemap(config);
-  // const tileset = map.addTilesetImage(
-  //   "tiles",
-  //   "tiles",
-  //   tileSize,
-  //   tileSize,
-  //   0,
-  //   1
-  // );
-  // const ground = map.createStaticLayer(0, tileset, 0, 0);
   dungeon.initialize(this);
+  let player = PlayerCharacter(15, 15);
 }
