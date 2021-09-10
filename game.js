@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 // import level1 from "./level/level_1";
-import dungeon from "./dungeon"
+import dungeon from "./dungeon";
 
 var config = {
   type: Phaser.AUTO,
@@ -19,9 +19,6 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
-
-
-
 
 function preload() {
   this.load.spritesheet("tiles", "/assets/colored.png", {
@@ -53,5 +50,5 @@ function create() {
   //   1
   // );
   // const ground = map.createStaticLayer(0, tileset, 0, 0);
-  dungeon.initialize(this)
+  dungeon.initialize(this);
 }
