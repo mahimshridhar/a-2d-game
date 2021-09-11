@@ -2,7 +2,7 @@
   "name": "rouguelike-game",
   "version": "1.0.0",
   "description": "",
-  "main": "game.js",
+  "main": "server.js",
   "dependencies": {
     "express": "^4.17.1",
     "phaser": "^3.55.2",
