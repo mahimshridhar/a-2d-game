@@ -1,34 +1,42 @@
-import level1 from "./level/level_1";
+import level from "./level/level_1";
 
 let dungeon = {
   sprites: {
     floor: 0,
     wall: 554,
   },
+  tileSize: 16,
+
+  // initializeEntity: function (entity) {
+  //   let x = this.map.tileToWorldX(entity.x);
+  //   let y = this.map.tileToWorldY(entity.y);
+  //   entity.sprite = this.scene.add(x, y, "tiles", entity.tile, entity.sprite.setOrgin(0));
+  // },
 
   initialize: function (scene) {
     //keep a reference to scene in dungeon object
 
-    console.log("scene", scene);
+    // console.log("scene", scene);
     this.scene = scene;
 
-    scene.level = level1.map((r) =>
+    this.level = level;
+
+    const levelWithTiles = (scene.level = level.map((r) =>
       r.map((t) => (t == 1 ? this.sprites.wall : this.sprites.floor))
-    );
-    const tileSize = 16;
+    ));
 
     const config = {
-      data: scene.level,
-      tileWidth: tileSize,
-      tileHeight: tileSize,
+      data: levelWithTiles,
+      tileWidth: this.tileSize,
+      tileHeight: this.tileSize,
     };
 
     const map = scene.make.tilemap(config);
     const tileset = map.addTilesetImage(
       "tiles",
       "tiles",
-      tileSize,
-      tileSize,
+      this.tileSize,
+      this.tileSize,
       0,
       1
     );

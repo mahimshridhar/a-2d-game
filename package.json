@@ -22,8 +22,7 @@
   "scripts": {
     "dev": "node server.js",
     "build": "webpack --config webpack.config.prod.js",
-    "start": "node server.js",
-    "heroku-postbuild": "npm run build"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
