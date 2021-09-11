@@ -4,7 +4,7 @@ const Player = (x, y) => {
   const p = Object.create(Player.prototype, {
     x: { value: x, writable: true, enumerable: true, configurable: true },
     y: { value: y, writable: true, enumerable: true, configurable: true },
-    movemenetPoint: {
+    movementPoints: {
       value: 1,
       writable: true,
       enumerable: true,
@@ -13,9 +13,9 @@ const Player = (x, y) => {
     sprite: { value: 29, writable: true, enumerable: true, configurable: true },
     cursor: {
       value: dungeon.scene.input.keyboard.createCursorKeys(),
-      //   writable: true,
-      //   enumerable: true,
-      //   configurable: true,
+      writable: true,
+      enumerable: true,
+      configurable: true,
     },
   });
 
@@ -37,17 +37,26 @@ Player.prototype = {
   turn: function () {
     let oldX = this.x;
     let oldY = this.y;
-    console.log("this.cursor.left", this.cursor);
+    let moved = false;
+
     if (this.movementPoints > 0) {
       if (this.cursor.left.isDown) {
-        console.log("run turn 2");
         this.x -= 1;
         moved = true;
       }
 
-      if (thiscursors.right.isDown) {
-        console.log("run turn 2");
+      if (this.cursor.right.isDown) {
         this.x += 1;
+        moved = true;
+      }
+
+      if (this.cursor.up.isDown) {
+        this.y -= 1;
+        moved = true;
+      }
+
+      if (this.cursor.down.isDown) {
+        this.y += 1;
         moved = true;
       }
 
@@ -56,12 +65,18 @@ Player.prototype = {
       }
     }
 
+    //collision delection
+    let titleAtDestination = dungeon.map.getTileAt(this.x, this.y);
+    if (titleAtDestination.index === dungeon.sprites.wall) {
+      this.x = oldX;
+      this.y = oldY;
+    }
+
     // tile movement code
     if (this.x !== oldX || this.y !== oldY) {
       dungeon.map.putTileAt(this.sprite, this.x, this.y);
-      //   dungeon.map.putTileAt(dungeon.sprites.floor, oldX, oldY);
+      dungeon.map.putTileAt(dungeon.sprites.floor, oldX, oldY);
     }
-    // dungeon.map.putTileAt(dungeon.sprites.floor, this.x, this.y);
   },
 };
 

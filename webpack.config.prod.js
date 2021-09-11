@@ -6,12 +6,12 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // const express = require("express");
 
 module.exports = {
-  mode: "development",
-  devtool: "eval-source-map",
+  mode: "production",
   entry: "./index.js",
   output: {
-    filename: "bundle.min.dev.js",
+    filename: "bundle.min.prod.js",
     publicPath: "/",
+    path: path.resolve(__dirname, "dist"),
   },
   module: {
     rules: [

@@ -7,11 +7,13 @@ const app = express();
 
 app.use("/assets", express.static("public"));
 
-// app.use(express.static(__dirname + "/assets"));
+const port = process.env.PORT || 8080;
 
-const port = 8080;
+const devModeEnabled = process.env.NODE_ENV === "production" ? false : true;
 
-const devModeEnabled = true;
+if (!devModeEnabled) {
+  app.use(express.static(__dirname + "/dist"));
+}
 
 if (devModeEnabled) {
   const compiler = webpack(devConfig);
@@ -22,6 +24,10 @@ if (devModeEnabled) {
 
   console.log("running dev");
   app.use(webpackDevMiddleware);
+} else {
+  app.get("/", (_, res) => {
+    res.sendFile(path.join(__dirname, "dist", "index.html"));
+  });
 }
 
 app.listen(port, () => {
