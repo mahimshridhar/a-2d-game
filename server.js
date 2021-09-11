@@ -22,8 +22,13 @@ if (devModeEnabled) {
     publicPath: devConfig.output.publicPath,
   });
 
-  console.log("running dev");
+  const webpackHotMiddleware = require("webpack-hot-middleware")(compiler, {
+    path: "/__webpack_hmr",
+  });
+
   app.use(webpackDevMiddleware);
+
+  app.use(webpackHotMiddleware);
 } else {
   app.get("/", (_, res) => {
     res.sendFile(path.join(__dirname, "dist", "index.html"));

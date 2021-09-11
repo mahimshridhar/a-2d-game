@@ -1,4 +1,4 @@
-// const webpack = require("webpack");
+const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -8,9 +8,14 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   mode: "development",
   devtool: "eval-source-map",
-  entry: "./index.js",
+  entry: [
+    "./index.js",
+    "webpack-hot-middleware/client?path=/__webpack_hmr&reload=true",
+  ],
   output: {
     filename: "bundle.min.dev.js",
+    hotUpdateChunkFilename: ".hot/hot-update.js",
+    hotUpdateMainFilename: ".hot/hot-update.json",
     publicPath: "/",
   },
   module: {
@@ -30,6 +35,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin(),
     new MiniCssExtractPlugin(),
