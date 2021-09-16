@@ -10,16 +10,25 @@ const Player = (x, y) => {
       enumerable: true,
       configurable: true,
     },
-    sprite: { value: 29, writable: true, enumerable: true, configurable: true },
+    // sprite: { value: 29, writable: true, enumerable: true, configurable: true },
     cursor: {
       value: dungeon.scene.input.keyboard.createCursorKeys(),
       writable: true,
       enumerable: true,
       configurable: true,
     },
+    title: { value: 29, writable: true, enumerable: true, configurable: true },
+    hp: { value: 10, writable: true, enumerable: true, configurable: true },
+    moving: {
+      value: false,
+      writable: true,
+      enumerable: true,
+      configurable: true,
+    },
   });
 
-  dungeon.map.putTileAt(p.sprite, p.x, p.y);
+  // dungeon.map.putTileAt(p.sprite, p.x, p.y);
+  dungeon.initializeEntity(p);
 
   return p;
 };

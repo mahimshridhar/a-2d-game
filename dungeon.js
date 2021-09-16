@@ -7,11 +7,37 @@ let dungeon = {
   },
   tileSize: 16,
 
-  // initializeEntity: function (entity) {
-  //   let x = this.map.tileToWorldX(entity.x);
-  //   let y = this.map.tileToWorldY(entity.y);
-  //   entity.sprite = this.scene.add(x, y, "tiles", entity.tile, entity.sprite.setOrgin(0));
-  // },
+  initializeEntity: function (entity) {
+    let x = this.map.tileToWorldX(entity.x);
+    let y = this.map.tileToWorldY(entity.y);
+    entity.sprite = this.scene.add(
+      x,
+      y,
+      "tiles",
+      entity.tile,
+      entity.sprite.setOrgin(0)
+    );
+  },
+
+  moveEntityTo: function (entity) {
+    entity.moving = true;
+    this.scene.tweens.add({
+      targets: entity.sprite,
+      onComplete: () => {
+        entity.moving = false;
+        entity.x = x;
+        entity.y = y;
+      },
+      x: this.map.tileToWorldX(x),
+      y: this.map.tileToWorldY(y),
+      ease: "Power2",
+      duration: 200,
+    });
+  },
+
+  isWalkableTile: function (x, y) {
+    return level[y][x] !== 1;
+  },
 
   initialize: function (scene) {
     //keep a reference to scene in dungeon object

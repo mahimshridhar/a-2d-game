@@ -9,7 +9,7 @@ app.use("/assets", express.static("public"));
 
 const port = process.env.PORT || 8080;
 
-const devModeEnabled = process.env.NODE_ENV === "production" ? false : true;
+const devModeEnabled = process.env.NODE_ENV === "development" ? true : false;
 
 if (!devModeEnabled) {
   app.use(express.static(__dirname + "/dist"));
