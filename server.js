@@ -37,7 +37,7 @@ const port = process.env.PORT || 8080;
 //   });
 // }
 
-app.get("/", (_, res) => {
+app.get("*", (_, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
