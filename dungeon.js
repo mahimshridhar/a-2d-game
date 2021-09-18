@@ -10,16 +10,15 @@ let dungeon = {
   initializeEntity: function (entity) {
     let x = this.map.tileToWorldX(entity.x);
     let y = this.map.tileToWorldY(entity.y);
-    entity.sprite = this.scene.add(
-      x,
-      y,
-      "tiles",
-      entity.tile,
-      entity.sprite.setOrgin(0)
+    entity.sprite = this.scene.add.sprite(x, y, "tiles", entity.tile);
+    console.log(
+      "entity.sprite ",
+      this.scene.add.sprite(x, y, "tiles", entity.tile).setOrigin(0)
     );
+    entity.sprite.setOrigin(0);
   },
 
-  moveEntityTo: function (entity) {
+  moveEntityTo: function (entity, x, y) {
     entity.moving = true;
     this.scene.tweens.add({
       targets: entity.sprite,
@@ -42,9 +41,7 @@ let dungeon = {
   initialize: function (scene) {
     //keep a reference to scene in dungeon object
 
-    // console.log("scene", scene);
     this.scene = scene;
-
     this.level = level;
 
     const levelWithTiles = (scene.level = level.map((r) =>
@@ -68,7 +65,7 @@ let dungeon = {
     );
 
     //keep a reference of map in the dungeon
-    this.map = map.createLayer(0, tileset, 0, 0);
+    this.map = map.createDynamicLayer(0, tileset, 0, 0);
   },
 };
 

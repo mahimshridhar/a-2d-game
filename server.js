@@ -9,13 +9,14 @@ app.use("/assets", express.static("public"));
 
 const port = process.env.PORT || 8080;
 
-const devModeEnabled = process.env.NODE_ENV === "development" ? true : false;
+const devModeEnabled = true
 
 if (!devModeEnabled) {
   app.use(express.static(__dirname + "/dist"));
 }
 
 if (devModeEnabled) {
+
   const compiler = webpack(devConfig);
 
   const webpackDevMiddleware = require("webpack-dev-middleware")(compiler, {
