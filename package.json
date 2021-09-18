@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "express": "^4.17.1",
+    "pathfinding": "^0.4.18",
     "phaser": "^3.55.2",
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0"

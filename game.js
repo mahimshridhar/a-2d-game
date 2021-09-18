@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import dungeon from "./dungeon";
 import PlayerCharacter from "./player";
 import movementManager from "./movementManager";
+import BasicMonstater from "./monster";
 
 export default function gameMain() {
   var config = {
@@ -35,9 +36,13 @@ export default function gameMain() {
 
   function create() {
     dungeon.initialize(this);
-    let player = PlayerCharacter(15, 15);
+    dungeon.player = PlayerCharacter(15, 15);
 
-    movementManager.addEntities(player);
+    let monster = BasicMonstater(70, 8);
+
+    movementManager.addEntities(dungeon.player);
+
+    movementManager.addEntities(monster);
   }
 
   function update() {
